@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html> 
+    <head> 
+        <title>MI WEB APP - Math</title> 
+        <link rel ="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+                <script src="{{ url_for('static', filename='js/math.js') }}" defer></script>    </head> 
+    <body> 
+        <header>   
+            <a href="{{ url_for('index') }}">Inicio</a> 
+            <a href="{{ url_for('math') }}">Matemáticas</a>
+            <a href="{{ url_for('azulejo') }}">Azulejos</a>  
+        </header>
+
+        <main>  
+            <div>   
+                <p>Página de Matemáticas</p>
+
+                <p>Escribe un numero.</p>
+                <input class="input-value1" type="number" placeholder="valor", id="input-value1">
+                <p>Escribe un numero.</p>
+                <input class="input-value2" type="number" placeholder="valor", id="input-value2">
+                <button class="button-ok", id="btn-OK">sumar</button>
+                <button class="button-ok", id="btn-restar">restar</button>
+                <button class="button-ok", id="btn-multiplicar">multiplicar</button>
+                <button class="button-ok", id="btn-dividir">dividir</button>
+            </div>
+        </main>
+        <footer>   
+            <p>Gracias por visitar el sitio WEB</p>
+        </footer>
+    </body>
+</html>

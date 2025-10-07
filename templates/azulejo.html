@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html> 
+    <head> 
+        <title>MI WEB APP - Math</title> 
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel ="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+        <script src="{{ url_for('static', filename='js/calculoAzulejo.js') }}" defer></script>
+    
+    </head> 
+    <body style="background-image: url('{{ url_for('static', filename='azulejoFondo.jpg') }}');">
+        <header>   
+        <a href="{{ url_for('index') }}">Inicio</a>
+        <a href="{{ url_for('math') }}">Matemáticas</a>
+        <a href="{{ url_for('azulejo') }}">Azulejos</a>   
+        </header>
+    
+
+        <main>  
+            <div>   
+                <p>Página de Azulejos</p>
+
+                <p style="background-color: black;">Escribe el ancho en metros.</p>
+                <input class="input-value1" type="number" placeholder="valor", id="input-value1">
+                <p style="background-color: black;">Escribe el largo en metros.</p>
+                <input class="input-value2" type="number" placeholder="valor", id="input-value2">
+                 <p style="background-color: black;">Escribe el precio de los azulejos por pieza.</p>
+                <input class="input-value3" type="number" placeholder="Precio", id="input-value3">
+                <button class="button-ok", id="btn-OK">Calcular</button>
+                
+            </div>
+        </main>
+        <footer>   
+            <p>Gracias por visitar el sitio WEB</p>
+        </footer>
+    </body>
+</html>
