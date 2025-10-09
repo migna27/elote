@@ -1,0 +1,12 @@
+<head> 
+        <title>MI WEB APP</title> 
+        <link rel ="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+        <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    </head> 
+    <body> 
+        <header>   
+            <!-- a significa anchor (ancla) -->
+        <a href="{{ url_for('index') }}">Inicio</a>
+        <a href="{{ url_for('math') }}">Matemáticas</a>
+        <a href="{{ url_for('azulejo') }}">Azulejos</a>
+        </header>
