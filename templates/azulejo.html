@@ -7,12 +7,8 @@
         <script src="{{ url_for('static', filename='js/calculoAzulejo.js') }}" defer></script>
     
     </head> 
-    <body style="background-image: url('{{ url_for('static', filename='azulejoFondo.jpg') }}');">
-        <header>   
-        <a href="{{ url_for('index') }}">Inicio</a>
-        <a href="{{ url_for('math') }}">Matemáticas</a>
-        <a href="{{ url_for('azulejo') }}">Azulejos</a>   
-        </header>
+    <body>
+        {% include 'header.html' %}
     
 
         <main>  

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+ <html> 
+    {% include 'header.html' %}
+        <main>  
+            <h1>El resultado para: "{{ phrase }}"</h1>
+            {% if result %}
+                <p>Es un palíndromo</p>
+            {% else %}
+                <p>No es un palíndromo</p>
+            {% endif %}
+        </main>
+       {% include 'footer.html' %}
+ </html>

@@ -5,12 +5,7 @@
         <link rel ="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
                 <script src="{{ url_for('static', filename='js/math.js') }}" defer></script>    </head> 
     <body> 
-        <header>   
-            <a href="{{ url_for('index') }}">Inicio</a> 
-            <a href="{{ url_for('math') }}">Matemáticas</a>
-            <a href="{{ url_for('azulejo') }}">Azulejos</a>  
-        </header>
-
+        {% include 'header.html' %}
         <main>  
             <div>   
                 <p>Página de Matemáticas</p>

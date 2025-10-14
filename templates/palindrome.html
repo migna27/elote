@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+ <html> 
+    {% include 'header.html' %}
+        <main>  
+            <div>   
+                <form method="post" action="/palindrome">
+                <!-- etiqueta p significa parrafo -->
+                <p>Escribe una frase.</p>
+                <input class="input-welcome" type="text" placeholder="Tu frase" id="input-phrase" name="input-phrase" required>
+            
+                <button class="button-ok" type="submit">aceptar</button>
+            </form>
+            </div>
+        </main>
+       {% include 'footer.html' %}
+ </html>
