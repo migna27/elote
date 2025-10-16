@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+ <html> 
+    {% include 'header.html' %}
+        <main>  
+            <div>   
+                <!-- etiqueta p significa parrafo -->
+                 <form method="post" action="/money">
+                <p>Escribe la cantidad de pesos a convertir.</p>
+                <input class="input-welcome" type="number" placeholder="pesos", id="input-money" name="input-money" required>
+            
+                <button class="button-ok" type="submit">aceptar</button>
+            </form>
+            </div>
+        </main>
+       {% include 'footer.html' %}
+ </html>

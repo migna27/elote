@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from entities.palindrome import Palindrome
+from entities.convertir import Convertir
 
 app = Flask(__name__)
 
@@ -28,6 +29,19 @@ def palindrome():
         return render_template('result.html', result=result, phrase=phrase)
     # Si el método es GET, simplemente mostramos la página inicial
     return render_template('palindrome.html')
+
+
+@app.route("/money", methods=['GET', 'POST'])
+def money():
+    if request.method == 'POST':
+        # Obtener la cantidad de pesos del formulario
+        pesos_str = request.form.get('input-money')
+        pesos = float(pesos_str) # Ejemplo de tasa de conversión
+        convert = Convertir(pesos)
+        dolares = convert.convertir()
+        return render_template('resultmoney.html', money=pesos, result=dolares)
+    return render_template('money.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5002)
