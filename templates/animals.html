@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+ <html> 
+    {% include 'header.html' %}
+        <main>  
+            <div>  
+                > 
+               <table class = "table table-bordered aling-middle"> 
+                <!-- Table head-->
+            <thead  class = "table-dark">   
+                <!-- Table row-->  
+                <tr>
+                    <th>Nombre</th>
+                    <th>Color</th>
+                           
+                </tr>
+            </thead>  
+            <!-- Table body el cuerpo de la tabla-->
+            <tbody>
+           {% for a in animals%}
+                <tr>
+                    {#Table data#}
+                    <td>{{ a.name }}</td>
+                    <td>{{ a.color }}</td>
+                </tr>
+           {% else %}
+                <tr>
+                    <td colspan="2">No hay animales disponibles.</td>
+                </tr>
+                 {% endfor %}
+            </tbody>
+            </table>
+            </div>
+        </main>
+       {% include 'footer.html' %}
+ </html>
