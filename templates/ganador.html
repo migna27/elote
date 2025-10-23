@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+ <html> 
+    {% include 'header.html' %}
+        <main>  
+            <h1>El numero ganador es: "{{ numero }}"</h1>
+                {% if ganador == true%}
+                <p>Felicidades haz ganado</p>
+            {% else %}
+                <p>Haz perdido, pipipipi sigue participando</p>
+            {% endif %}
+        </main>
+       {% include 'footer.html' %}
+ </html>

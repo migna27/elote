@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+ <html> 
+    {% include 'header.html' %}
+        <main>  
+            <div>   
+                <!-- etiqueta p significa parrafo -->
+                 <form method="post" action="/sorteo">
+                <p>Escriba tres numeros participantes.</p>
+                <input class="input-welcome" type="number" placeholder="numero", id="number1" name="number1" required>
+                    <input class="input-welcome" type="number" placeholder="numero", id="number2" name="number2" required> 
+                    <input class="input-welcome" type="number" placeholder="numero", id="number3" name="number3" required>
+                <button class="button-ok" type="submit">aceptar</button>
+            </form>
+            </div>
+        </main>
+       {% include 'footer.html' %}
+ </html>

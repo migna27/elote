@@ -2,7 +2,8 @@ from flask import Flask, render_template, request
 from entities.palindrome import Palindrome
 from entities.convertir import Convertir
 from entities.animal import Animal
-
+from entities.sorteo import Sorteo
+import random
 app = Flask(__name__)
 
 #esta será la ruta principal
@@ -42,6 +43,18 @@ def money():
         dolares = convert.convertir()
         return render_template('resultmoney.html', money=pesos, result=dolares)
     return render_template('money.html')
+
+
+@app.route ('/sorteo', methods=['GET', 'POST'])
+def sorteo():
+    if request.method == 'POST':
+        numero = random.randint(1, 100)
+        num1 = request.form.get('number1')
+        num2 = request.form.get('number2')
+        num3 = request.form.get('number3')
+        ganador = Sorteo.ganador(numero, num1, num2, num3)
+        return render_template('ganador.html', ganador=ganador, numero=numero)
+    return render_template('sorteo.html')
 
 @app.route('/animals')
 def animals():
