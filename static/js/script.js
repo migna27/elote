@@ -14,3 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
         console.warn("Esto es una advertencia simulada");
     });
 });
+
+// Escucha el evento 'mousemove' en todo el documento
+document.addEventListener('mousemove', function(e) {
+    // Actualiza las variables CSS con la posición del cursor
+    // e.clientX = posición X
+    // e.clientY = posición Y
+    document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+    document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
+});
+
