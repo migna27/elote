@@ -1,3 +1,6 @@
+html {
+    background-color: rgb(8, 8, 8); 
+}
 html, body{
     height: 100%;
     margin: 0;
@@ -5,7 +8,7 @@ html, body{
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    background-color: rgb(15, 16, 16);
+    
 }
 html, body{
     height: 100%;
@@ -15,10 +18,9 @@ html, body{
     display: flex;
     flex-direction: column;
 
-    /* Color de fondo base */
-    background-color: rgb(8, 8, 8); 
+    background-color: transparent;
     
-    /* * AÑADE ESTO: 
+    /* * 
      * Un gradiente radial que sigue al cursor (definido por las variables)
      */
     background-image: radial-gradient(
@@ -436,47 +438,59 @@ header a:hover::after {
   }
 }
 
-/* --- 2. Creamos la capa de la cascada --- */
+/* --- INICIA CÓDIGO COMPLETO DE CASCADA CON COLOR --- */
+
+/* 1. Animación de Cascada (la que ya tenías) */
+@keyframes waterfall-flow {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 400px;
+  }
+}
+
+/* 2. Animación de Ciclo de Color (esta es la nueva) */
+@keyframes color-cycle {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* 3. Aplicación de AMBAS animaciones */
 body::before {
   content: '';
-  position: fixed; /* Lo fija al fondo */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  
-  /* MUY IMPORTANTE: 
-     Lo ponemos en z-index: -1 para que esté DETRÁS 
-     de tu contenido (botones, texto, etc.) pero 
-     ENCIMA del 'background-color' del body.
-     Tu "foco de luz" se renderizará encima de esto.
-  */
   z-index: -1;
 
-  /* --- Las "figuras" (contornos de líneas) --- */
-  /* Usamos tus colores: #e8cce5 (enlaces) y #730768 (botón) 
-     con transparencia (rgba) para el brillo. */
+  /* Los colores base (turquesa y azul) */
   background-image: 
-    /* Líneas lavanda a 20 grados */
     repeating-linear-gradient(
       20deg, 
       transparent 0px, 
       transparent 149px, 
-      rgba(232, 204, 229, 0.2) 150px, /* Línea brillante de 1px */
-      rgba(232, 204, 229, 0.2) 151px
+      rgba(64, 224, 208, 0.2) 150px, /* Turquesa brillante */
+      rgba(64, 224, 208, 0.2) 151px
     ),
-    /* Líneas moradas a -45 grados */
     repeating-linear-gradient(
       -45deg,
       transparent 0px,
       transparent 99px,
-      rgba(115, 7, 104, 0.2) 100px, /* Línea brillante de 1px */
-      rgba(115, 7, 104, 0.2) 101px
+      rgba(125, 128, 199, 0.2) 100px, /* Azul/morado */
+      rgba(125, 128, 199, 0.2) 101px
     );
   
-  /* --- 3. Aplicamos la animación --- */
-  animation-name: waterfall-flow;
-  animation-duration: 10s; /* Qué tan rápida es la cascada */
-  animation-timing-function: linear; /* Velocidad constante */
-  animation-iteration-count: infinite; /* Repetir por siempre */
+  /* Aquí se aplican las DOS animaciones */
+  animation: 
+    waterfall-flow 10s linear infinite,
+    color-cycle 15s linear infinite;
 }
+
+/* --- TERMINA CÓDIGO COMPLETO DE CASCADA CON COLOR --- */
