@@ -1,100 +1,201 @@
-html {
-    background-color: rgb(8, 8, 8); 
-}
-html, body{
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    
-}
-html, body{
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
 
-    background-color: transparent;
+html {
+    background-color: #000; 
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
     
-    /* * 
-     * Un gradiente radial que sigue al cursor (definido por las variables)
-     */
     background-image: radial-gradient(
         circle 400px at var(--mouse-x) var(--mouse-y),
-        /* Un brillo sutil usando el color de tu botón */
-        rgba(125, 128, 199, 0.3) 0%,
-        /* Se desvanece a transparente */
-        rgba(9, 81, 112, 0.674) 100% 
+        rgba(0, 0, 128, 0.3) 0%,
+        rgba(0, 0, 128, 0.0) 100%  
     );
     background-repeat: no-repeat;
+    background-color: #000; 
     position: relative; 
-    overflow-x: hidden; /* Evita barras de scroll extrañas */
-
+    overflow-x: hidden;
 }
-header{
-    background-color: #201e1e;
-    text-align:left;
-    padding:15px;
+
+/* 2. HEADER Y FOOTER */
+header {
+    
+    background-color: #0a0a0a; /* Casi negro */
+    text-align: left;
+    padding: 15px;
     font-size: x-large;
-    size: 4cm;
-   
+    border-bottom: 1px solid #00BFFF; 
 }
 
-header a{
-    color: #757895;
-    /* el primer valor aplica para top bottom, y el segundo para left right */
+footer {
+    
+    background-color: #0a0a0a;
+    padding: 15px;
+    font-size: 14px;
+    color: #444; /* Texto gris muy oscuro */
+    text-align: left;
+    border-top: 1px solid #222; /* Borde gris muy oscuro */
+}
+
+/* 3. ENLACES DEL HEADER */
+header a {
+  
+    color: #999; /* Gris claro (no blanco) */
     margin: 15px;
     font-weight: bold;
+    position: relative; 
+    text-decoration: none; 
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-main{
+header a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0); 
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #00BFFF; 
+    transform-origin: center; 
+    transition: transform 0.3s ease;
+}
+
+header a:hover {
+    color: #00BFFF; /* Se ilumina a Azul */
+    text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+}
+
+/* 4. CONTENIDO PRINCIPAL (MAIN) Y TEXTO */
+main {
     flex: 1;
     padding: 30px;
     text-align: left;
+    animation: content-fade-in 0.6s ease-out forwards;
 }
 
-main p{
-    color: rgb(141, 137, 137);
-    font-size: 18px;
-    margin-bottom: 15px;
+/* Párrafos y etiquetas */
+main p,
+main label {
+  
+  color: #444; /* Gris muy oscuro */
+  font-size: 18px;
+  margin-bottom: 15px;
+  text-shadow: none;
+  transition: color 0.3s ease;
 }
 
-.input-welcome{
-padding: 10px;
-width: 200px;
-margin-bottom: 20px;
+main p:hover,
+main label:hover {
+  color: #777; /* Se ilumina a gris medio */
 }
 
-.button-ok {
-  padding: 10px 20px;
-  background-color: #730768;
-  color: aliceblue; 
-  cursor: pointer;
+/* Títulos H1 */
+main h1 {
+  
+  color: #555; 
+  font-size: 2.5em;
+  animation: none; /* Sin animación de brillo */
+}
+
+/* 5. INPUTS (CAMPOS DE TEXTO) */
+.input-welcome,
+.input-value1,
+.input-value2,
+.input-value3 {
+  
+  width: 300px;
+  font-size: 1.2em;
+  padding: 10px 5px;
+  margin-bottom: 25px;
+  background: transparent;
   border: none;
-  border-radius: 5px;
+  outline: none;
+  border-bottom: 2px solid #333; /* Línea base muy oscura */
+  color: #444; /* Texto oscuro */
+  transition: border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover (cuando no está seleccionado) */
+.input-welcome:not(:focus):hover,
+.input-value1:not(:focus):hover,
+.input-value2:not(:focus):hover,
+.input-value3:not(:focus):hover {
+  border-color: #00BFFF; /* Se ilumina a Azul */
+}
+
+/* Focus (seleccionado) - MANTIENE EL BRILLO */
+.input-welcome:focus,
+.input-value1:focus,
+.input-value2:focus,
+.input-value3:focus {
+  color: #CCE5FF; /* Texto azulado claro */
+  border-color: #00BFFF; /* Borde se mantiene Azul */
+  outline: none; 
+  /* Aplicamos la animación de "brillo" (box-shadow) */
+  animation: blue-input-glow 2s ease-in-out infinite;
+}
+
+/* 6. BOTONES */
+.button-ok {
+  /* (NO PERMITIDO) Botón oscuro por defecto */
+  padding: 10px 20px;
   font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0; 
+  
+  background-color: transparent;
+  border: 2px solid #444; /* Borde gris oscuro */
+  color: #444; /* Texto gris oscuro */
+  
+  transition: all 0.2s ease;
+  animation: none; /* Sin pulso por defecto */
 }
 
-footer{
-    background-color: #6e6e6e;
-    padding: 15px;
-    font-size: 14px;
-    color: #2b3149;
-    text-align: left;
+.button-ok:hover {
+  /* Se ilumina a Azul al interactuar */
+  background-color: #00BFFF;
+  color: #000; /* Texto negro */
+  transform: translateY(-2px);
+  border-color: #00BFFF;
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.7);
 }
 
+/* 7. TABLAS (como en animals.html) */
 table, th, td {
-    border: 3px solid black;
+    /* (NO PERMITIDO) Bordes oscuros */
+    border: 1px solid #333;
     border-collapse: collapse;
     padding: 10px;
     text-align: left;
-    text-decoration-color: aqua;
 }
 
+.table > thead {
+    background-color: #0a0a0a;
+    border-bottom: 2px solid #333;
+    color: #666; /* Texto de cabecera oscuro */
+}
+
+/* Filas de la tabla */
+.table > tbody > tr {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #444; /* Texto oscuro */
+    background-color: transparent; 
+}
+.table > tbody > tr:hover {
+    /* Iluminación sutil al interactuar */
+    background-color: rgba(0, 191, 255, 0.1);
+    color: #777; 
+    cursor: default;
+}
+
+/* (Estilos de .table... de Bootstrap se quedan) */
 .table {
   --bs-table-color-type: initial;
   --bs-table-bg-type: initial;
@@ -132,365 +233,99 @@ table, th, td {
 .table > thead {
   vertical-align: bottom;
 }
-.table-group-divider {
-  border-top: calc(var(--bs-border-width) * 2) solid currentcolor;
-}
-.caption-top {
-  caption-side: top;
-}
-.table-sm > :not(caption) > * > * {
-  padding: 0.25rem 0.25rem;
-}
-.table-bordered > :not(caption) > * {
-  border-width: var(--bs-border-width) 0;
-}
-.table-bordered > :not(caption) > * > * {
-  border-width: 0 var(--bs-border-width);
-}
-.table-borderless > :not(caption) > * > * {
-  border-bottom-width: 0;
-}
-.table-borderless > :not(:first-child) {
-  border-top-width: 0;
-}
-.table-striped > tbody > tr:nth-of-type(odd) > * {
-  --bs-table-color-type: var(--bs-table-striped-color);
-  --bs-table-bg-type: var(--bs-table-striped-bg);
-}
-.table-striped-columns > :not(caption) > tr > :nth-child(2n) {
-  --bs-table-color-type: var(--bs-table-striped-color);
-  --bs-table-bg-type: var(--bs-table-striped-bg);
-}
-.table-active {
-  --bs-table-color-state: var(--bs-table-active-color);
-  --bs-table-bg-state: var(--bs-table-active-bg);
-}
-.table-hover > tbody > tr:hover > * {
-  --bs-table-color-state: var(--bs-table-hover-color);
-  --bs-table-bg-state: var(--bs-table-hover-bg);
-}
-.table-primary {
-  --bs-table-color: #000;
-  --bs-table-bg: #cfe2ff;
-  --bs-table-border-color: #a6b5cc;
-  --bs-table-striped-bg: #c5d7f2;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #bacbe6;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #bfd1ec;
-  --bs-table-hover-color: #000;
-  color: var(--bs-table-color);
-  border-color: var(--bs-table-border-color);
-}
-.table-secondary {
-  --bs-table-color: #000;
-  --bs-table-bg: #e2e3e5;
-  --bs-table-border-color: #b5b6b7;
-  --bs-table-striped-bg: #d7d8da;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #cbccce;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #d1d2d4;
-  --bs-table-hover-color: #000;
-  color: var(--bs-table-color);
-  border-color: var(--bs-table-border-color);
-}
-.table-success {
-  --bs-table-color: #000;
-  --bs-table-bg: #d1e7dd;
-  --bs-table-border-color: #a7b9b1;
-  --bs-table-striped-bg: #c7dbd2;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #bcd0c7;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #c1d6cc;
-  --bs-table-hover-color: #000;
-  color: var(--bs-table-color);
-  border-color: var(--bs-table-border-color);
-}
-.table-info {
-  --bs-table-color: #000;
-  --bs-table-bg: #cff4fc;
-  --bs-table-border-color: #a6c3ca;
-  --bs-table-striped-bg: #c5e8ef;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #badce3;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #bfe2e9;
-  --bs-table-hover-color: #000;
-  color: var(--bs-table-color);
-  border-color: var(--bs-table-border-color);
-}
-.table-warning {
-  --bs-table-color: #000;
-  --bs-table-bg: #fff3cd;
-  --bs-table-border-color: #ccc2a4;
-  --bs-table-striped-bg: #f2e7c3;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #e6dbb9;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #ece1be;
-  --bs-table-hover-color: #000;
-  color: var(--bs-table-color);
-  border-color: var(--bs-table-border-color);
-}
-.table-danger {
-  --bs-table-color: #000;
-  --bs-table-bg: #f8d7da;
-  --bs-table-border-color: #c6acae;
-  --bs-table-striped-bg: #eccccf;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #dfc2c4;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #e5c7ca;
-  --bs-table-hover-color: #000;
-  color: var(--bs-table-color);
-  border-color: var(--bs-table-border-color);
-}
-.table-light {
-  --bs-table-color: #000;
-  --bs-table-bg: #f8f9fa;
-  --bs-table-border-color: #c6c7c8;
-  --bs-table-striped-bg: #ecedee;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #dfe0e1;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #e5e6e7;
-  --bs-table-hover-color: #000;
-  color: var(--bs-table-color);
-  border-color: var(--bs-table-border-color);
-}
+/* ... */
 .table-dark {
-  --bs-table-color: #fff;
-  --bs-table-bg: #212529;
-  --bs-table-border-color: #4d5154;
-  --bs-table-striped-bg: #2c3034;
-  --bs-table-striped-color: #fff;
-  --bs-table-active-bg: #373b3e;
-  --bs-table-active-color: #fff;
-  --bs-table-hover-bg: #323539;
-  --bs-table-hover-color: #fff;
-  color: var(--bs-table-color);
-  border-color: var(--bs-table-border-color);
-}
-.table-responsive {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-@media (max-width: 575.98px) {
-  .table-responsive-sm {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-@media (max-width: 767.98px) {
-  .table-responsive-md {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-@media (max-width: 991.98px) {
-  .table-responsive-lg {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-@media (max-width: 1199.98px) {
-  .table-responsive-xl {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-@media (max-width: 1399.98px) {
-  .table-responsive-xxl {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+  /* Esto sobreescribe el .table-dark de animals.html */
+  --bs-table-color: #666;
+  --bs-table-bg: #0a0a0a;
+  --bs-table-border-color: #333;
 }
 
-/* --- Efecto Hover para Botones --- */
-.button-ok {
-  /* ... tus estilos existentes ... */
-  /* Añadimos una transición para que el efecto sea suave */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
 
-.button-ok:hover {
-  /* 1. Lo "elevamos" un poco */
-  transform: translateY(-3px);
-  
-  /* 2. Le damos un "brillo" con el color de tu header */
-  box-shadow: 0px 5px 15px rgba(32, 30, 30, 0.7);
-  
-  /* 3. Opcional: Aumentamos un poco el brillo del botón */
-  filter: brightness(1.1);
-}
-
-/* --- Efecto Hover para Enlaces del Header --- */
-header a {
-  /* ... tus estilos existentes ... */
-  /* Añadimos 'position: relative' para posicionar el subrayado */
-  position: relative; 
-  /* Evita el subrayado por defecto */
-  text-decoration: none; 
-  /* Transición para el color */
-  transition: color 0.3s ease;
-}
-
-/* Creamos el "pseudo-elemento" ::after que será nuestro subrayado */
-header a::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  
-  /* Lo escalamos a 0 para que esté oculto */
-  transform: scaleX(0); 
-  
-  height: 2px;
-  bottom: -5px; /* Posición 5px debajo del enlace */
-  left: 0;
-  
-  /* Usamos el color de tus enlaces */
-  background-color: #e8cce5; 
-  
-  /* Animación: se origina desde el centro */
-  transform-origin: center; 
-  transition: transform 0.3s ease;
-}
-
-/* Cuando pasamos el cursor... */
-header a:hover {
-  /* Opcional: Cambia el color del texto ligeramente */
-  color: #fff; 
-}
-
-/* ...hacemos que el subrayado (::after) escale a su tamaño normal */
-header a:hover::after {
-  transform: scaleX(1);
-}
-
-/* --- 1. Definimos la animación de "brillo de colores" --- */
-/* Usaremos los colores que ya tienes: 
-   #730768 (botón) y #e8cce5 (enlaces) */
-@keyframes colorful-glow {
-  0% {
-    /* Inicia con el brillo de enlace */
-    box-shadow: 0 0 5px #e8cce5, 0 0 10px #e8cce5;
-  }
-  50% {
-    /* A la mitad, cambia al brillo del botón */
-    box-shadow: 0 0 8px #730768, 0 0 15px #730768;
-  }
-  100% {
-    /* Vuelve al brillo de enlace */
-    box-shadow: 0 0 5px #e8cce5, 0 0 10px #e8cce5;
-  }
-}
-
-/* --- 2. Preparamos los inputs para la animación --- */
-/* Agrupamos todas las clases de input que usas */
-.input-welcome,
-.input-value1,
-.input-value2,
-.input-value3 {
-  /* ... (tus estilos existentes como padding, width, etc.) ... */
-  
-  /* Añadimos una transición para que el 'scale' sea suave */
-  transition: transform 0.2s ease-out, box-shadow 0.2s ease;
-  
-  /* Un borde sutil para que se vea bien */
-  border: 2px solid transparent;
-}
-
-/* --- 3. Aplicamos los efectos en :focus --- */
-.input-welcome:focus,
-.input-value1:focus,
-.input-value2:focus,
-.input-value3:focus {
-  
-  /* 1. Lo hacemos ligeramente más grande */
-  transform: scale(1.05);
-  
-  /* 2. Aplicamos la animación de brillo */
-  animation-name: colorful-glow;
-  animation-duration: 2s; /* Duración de un ciclo */
-  animation-iteration-count: infinite; /* Que se repita siempre */
-  animation-timing-function: ease-in-out; /* Suaviza la animación */
-  
-  /* Opcional: un borde fijo al estar seleccionado */
-  border-color: #e8cce5;
-  
-  /* Quitamos el borde azul/negro que pone el navegador por defecto */
-  outline: none; 
-}
-
-/* --- 1. Definimos la animación de "cascada" --- */
-/* Moverá la posición del fondo verticalmente */
-@keyframes waterfall-flow {
+/* 8. LLUVIA DE FIGURAS (COLORES NUEVOS) */
+@keyframes fall {
+  /* (PERMITIDO) */
   from {
-    /* Inicia en la posición 0 */
-    background-position: 0 0;
+    transform: translateY(-20vh);
+    opacity: 1;
   }
   to {
-    /* Termina en 400px (un número arbitrario 
-       para que la repetición sea fluida) */
-    background-position: 0 400px;
+    transform: translateY(110vh);
+    opacity: 0;
   }
 }
-
-/* --- INICIA CÓDIGO COMPLETO DE CASCADA CON COLOR --- */
-
-/* 1. Animación de Cascada (la que ya tenías) */
-@keyframes waterfall-flow {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 0 400px;
-  }
-}
-
-/* 2. Animación de Ciclo de Color (esta es la nueva) */
-@keyframes color-cycle {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    filter: hue-rotate(360deg);
-  }
-}
-
-/* 3. Aplicación de AMBAS animaciones */
-body::before {
-  content: '';
-  position: fixed; 
+.figure-rain-container {
+  /* (PERMITIDO) */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-
-  /* Los colores base (turquesa y azul) */
-  background-image: 
-    repeating-linear-gradient(
-      20deg, 
-      transparent 0px, 
-      transparent 149px, 
-      rgba(64, 224, 208, 0.2) 150px, /* Turquesa brillante */
-      rgba(64, 224, 208, 0.2) 151px
-    ),
-    repeating-linear-gradient(
-      -45deg,
-      transparent 0px,
-      transparent 99px,
-      rgba(125, 128, 199, 0.2) 100px, /* Azul/morado */
-      rgba(125, 128, 199, 0.2) 101px
-    );
-  
-  /* Aquí se aplican las DOS animaciones */
-  animation: 
-    waterfall-flow 10s linear infinite,
-    color-cycle 15s linear infinite;
+  z-index: -1; 
+  overflow: hidden; 
+}
+.figure-item {
+  /* (PERMITIDO) */
+  position: absolute;
+  top: -20px; 
+  width: 15px;
+  height: 15px;
+  background-color: #00BFFF; /* Azul */
+  border-radius: 60%;
+  opacity: 0.8; /* Sutil */
+  animation-name: fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.figure-item.square {
+  /* (PERMITIDO) */
+  border-radius: 0;
+  background-color: rgba(0, 191, 255, 0.2); /* Azul más tenue */
+  width: 10px;
+  height: 10px;
 }
 
-/* --- TERMINA CÓDIGO COMPLETO DE CASCADA CON COLOR --- */
+/* 9. BARRA DE SCROLL (SCROLLBAR) */
+::-webkit-scrollbar {
+  /* (NO PERMITIDO) Oscuro */
+  width: 10px;
+  background-color: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #222; /* Gris oscuro */
+  border-radius: 10px;
+  border: 2px solid #0a0a0a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #444; /* Gris medio */
+}
+
+/* 10. ANIMACIONES KEYFRAMES (SOLO LAS NECESARIAS) */
+
+/* Animación de entrada */
+@keyframes content-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Brillo para Input (box-shadow) */
+@keyframes blue-input-glow {
+  /* (PERMITIDO) */
+  0% {
+    box-shadow: 0 4px 10px -5px rgba(0, 191, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px -5px rgba(0, 191, 255, 0.8);
+  }
+  100% {
+    box-shadow: 0 4px 10px -5px rgba(0, 191, 255, 0.4);
+  }
+}
+
+/* --- FIN DEL ARCHIVO styles.css --- */
