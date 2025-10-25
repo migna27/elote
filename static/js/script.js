@@ -1,36 +1,22 @@
-//evento que se ejecita cuando se ternima de cargar el DOM
-//DOM = Document Object Model
-document.addEventListener("DOMContentLoaded", function() {
-    // declaracion de variables en javaScript que representa el boton en HTML
-    var btnOK = document.getElementById("btn-OK");
-    // declaracion del evento click del boton
-    btnOK.addEventListener("click", function() {
-        //delcaramos una variable que representa el input en HTML
-        var name = document.getElementById("input-name")
-        //mostramos una alerta con el nombre escrito en el input
-        alert("Hola " + name.value + ", bienvenido a mi sitio WEB");
-        console.log("Se imprimio la alerta");
-        console.error("Esto es un error simulado");
-        console.warn("Esto es una advertencia simulada");
-    });
-});
-
-// Escucha el evento 'mousemove' en todo el documento
-document.addEventListener('mousemove', function(e) {
-    // Actualiza las variables CSS con la posición del cursor
-    // e.clientX = posición X
-    // e.clientY = posición Y
-    document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
-    document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
-});
-
-// --- INICIA CÓDIGO DE LLUVIA DE FIGURAS ---
-
-// Espera a que el DOM esté cargado
+// evento DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function() {
     
-    // ... (tu código de btnOK y mousemove se queda como está) ...
+    // --- CÓDIGO DEL BOTÓN (de la parte superior de tu archivo) ---
+    var btnOK = document.getElementById("btn-OK");
+    // declaracion del evento click del boton
+    if (btnOK) { // Comprobamos si el botón existe en esta página
+        btnOK.addEventListener("click", function() {
+            //delcaramos una variable que representa el input en HTML
+            var name = document.getElementById("input-name")
+            //mostramos una alerta con el nombre escrito en el input
+            alert("Hola " + name.value + ", bienvenido a mi sitio WEB");
+            console.log("Se imprimio la alerta");
+            console.error("Esto es un error simulado");
+            console.warn("Esto es una advertencia simulada");
+        });
+    }
 
+    // --- CÓDIGO DE LA LLUVIA (de la parte inferior de tu archivo) ---
     const container = document.querySelector(".figure-rain-container");
 
     function createFigure() {
@@ -69,4 +55,14 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Crear una nueva figura cada 300ms
     setInterval(createFigure, 300);
+});
+
+// --- CÓDIGO DEL MOUSEMOVE (se queda afuera) ---
+// Escucha el evento 'mousemove' en todo el documento
+document.addEventListener('mousemove', function(e) {
+    // Actualiza las variables CSS con la posición del cursor
+    // e.clientX = posición X
+    // e.clientY = posición Y
+    document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+    document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
 });

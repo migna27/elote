@@ -1,4 +1,3 @@
-
 html {
     background-color: #000; 
 }
@@ -17,6 +16,7 @@ html, body {
         rgba(0, 0, 128, 0.0) 100%  
     );
     background-repeat: no-repeat;
+    /* MANTENEMOS EL FONDO NEGRO */
     background-color: #000; 
     position: relative; 
     overflow-x: hidden;
@@ -24,22 +24,28 @@ html, body {
 
 /* 2. HEADER Y FOOTER */
 header {
-    
     background-color: #0a0a0a; /* Casi negro */
     text-align: left;
     padding: 15px;
     font-size: x-large;
     border-bottom: 1px solid #00BFFF; 
+    
+    /* AÑADIDO: Poner delante de la lluvia */
+    position: relative;
+    z-index: 2;
 }
 
 footer {
-    
     background-color: #0a0a0a;
     padding: 15px;
     font-size: 14px;
     color: #444; /* Texto gris muy oscuro */
     text-align: left;
     border-top: 1px solid #222; /* Borde gris muy oscuro */
+    
+    /* AÑADIDO: Poner delante de la lluvia */
+    position: relative;
+    z-index: 2;
 }
 
 /* 3. ENLACES DEL HEADER */
@@ -77,6 +83,10 @@ main {
     padding: 30px;
     text-align: left;
     animation: content-fade-in 0.6s ease-out forwards;
+    
+    /* AÑADIDO: Poner delante de la lluvia */
+    position: relative;
+    z-index: 1;
 }
 
 /* Párrafos y etiquetas */
@@ -95,12 +105,13 @@ main label:hover {
   color: #777; /* Se ilumina a gris medio */
 }
 
-/* Títulos H1 */
 main h1 {
-  
   color: #555; 
   font-size: 2.5em;
-  animation: none; /* Sin animación de brillo */
+  /* Usamos la nueva animación 'single-flicker' 
+    con una duración de 4 segundos. 
+  */
+  animation: single-flicker 4s linear infinite;
 }
 
 /* 5. INPUTS (CAMPOS DE TEXTO) */
@@ -244,7 +255,6 @@ table, th, td {
 
 /* 8. LLUVIA DE FIGURAS (COLORES NUEVOS) */
 @keyframes fall {
-  /* (PERMITIDO) */
   from {
     transform: translateY(-20vh);
     opacity: 1;
@@ -255,17 +265,17 @@ table, th, td {
   }
 }
 .figure-rain-container {
-  /* (PERMITIDO) */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; 
+  
+  /* CORREGIDO: Poner detrás del contenido (z-index: 1) pero delante del body (z-index: 0) */
+  z-index: 0; 
   overflow: hidden; 
 }
 .figure-item {
-  /* (PERMITIDO) */
   position: absolute;
   top: -20px; 
   width: 15px;
@@ -278,16 +288,15 @@ table, th, td {
   animation-iteration-count: infinite;
 }
 .figure-item.square {
-  /* (PERMITIDO) */
   border-radius: 0;
-  background-color: rgba(0, 191, 255, 0.2); /* Azul más tenue */
+  /* CORREGIDO: Opacidad aumentada a 0.6 */
+  background-color: rgba(0, 191, 255, 0.6); 
   width: 10px;
   height: 10px;
 }
 
 /* 9. BARRA DE SCROLL (SCROLLBAR) */
 ::-webkit-scrollbar {
-  /* (NO PERMITIDO) Oscuro */
   width: 10px;
   background-color: #0a0a0a;
 }
@@ -316,7 +325,6 @@ table, th, td {
 
 /* Brillo para Input (box-shadow) */
 @keyframes blue-input-glow {
-  /* (PERMITIDO) */
   0% {
     box-shadow: 0 4px 10px -5px rgba(0, 191, 255, 0.4);
   }
@@ -328,4 +336,37 @@ table, th, td {
   }
 }
 
-/* --- FIN DEL ARCHIVO styles.css --- */
+@keyframes single-flicker {
+  
+  /* Paso 1: El título está "apagado" (color gris) 
+    durante el 90% de la animación (3.6 segundos). 
+  */
+  0%, 90% {
+    color: #555;
+    text-shadow: none;
+  }
+  
+  /* Paso 2: El parpadeo. 
+    Ocurre muy rápido, justo al final del ciclo.
+  */
+  91% {
+    color: #00BFFF;
+    text-shadow: 0 0 10px #00BFFF;
+  }
+  92% {
+    color: #555;
+    text-shadow: none;
+  }
+  93% {
+    color: #00BFFF;
+    text-shadow: 0 0 10px #00BFFF;
+  }
+  
+  /* Paso 3: Vuelve al estado "apagado" 
+    para terminar el ciclo.
+  */
+  94%, 100% {
+    color: #555;
+    text-shadow: none;
+  }
+}
