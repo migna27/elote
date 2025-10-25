@@ -16,21 +16,22 @@ html, body {
         rgba(0, 0, 128, 0.0) 100%  
     );
     background-repeat: no-repeat;
-    /* MANTENEMOS EL FONDO NEGRO */
+    
     background-color: #000; 
     position: relative; 
     overflow-x: hidden;
+    transition: background-image 0.1s ease-out;
 }
 
 /* 2. HEADER Y FOOTER */
 header {
-    background-color: #0a0a0a; /* Casi negro */
+    background-color: #0a0a0a; 
     text-align: left;
     padding: 15px;
-    font-size: x-large;
+    font-size: xx-large;
     border-bottom: 1px solid #00BFFF; 
     
-    /* AÑADIDO: Poner delante de la lluvia */
+
     position: relative;
     z-index: 2;
 }
@@ -39,11 +40,9 @@ footer {
     background-color: #0a0a0a;
     padding: 15px;
     font-size: 14px;
-    color: #444; /* Texto gris muy oscuro */
-    text-align: left;
-    border-top: 1px solid #222; /* Borde gris muy oscuro */
-    
-    /* AÑADIDO: Poner delante de la lluvia */
+    color: #666;
+    text-align: center; 
+    border-top: 1px solid #222; 
     position: relative;
     z-index: 2;
 }
@@ -51,12 +50,13 @@ footer {
 /* 3. ENLACES DEL HEADER */
 header a {
   
-    color: #999; /* Gris claro (no blanco) */
+    color: #999; 
     margin: 15px;
     font-weight: bold;
     position: relative; 
     text-decoration: none; 
     transition: color 0.3s ease, text-shadow 0.3s ease;
+    animation: header-flicker 5s infinite linear
 }
 
 header a::after {
@@ -75,6 +75,7 @@ header a::after {
 header a:hover {
     color: #00BFFF; /* Se ilumina a Azul */
     text-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+    animation: none;
 }
 
 /* 4. CONTENIDO PRINCIPAL (MAIN) Y TEXTO */
@@ -89,11 +90,9 @@ main {
     z-index: 1;
 }
 
-/* Párrafos y etiquetas */
 main p,
 main label {
-  
-  color: #444; /* Gris muy oscuro */
+  color: #999; 
   font-size: 18px;
   margin-bottom: 15px;
   text-shadow: none;
@@ -102,18 +101,28 @@ main label {
 
 main p:hover,
 main label:hover {
-  color: #777; /* Se ilumina a gris medio */
+  color: #ccc; 
 }
 
+/* Títulos H1 */
 main h1 {
+  
   color: #555; 
   font-size: 2.5em;
-  /* Usamos la nueva animación 'single-flicker' 
-    con una duración de 4 segundos. 
-  */
-  animation: single-flicker 4s linear infinite;
+  animation: none; 
+}
+main .content-wrapper {
+  max-width: 800px; /* Ancho máximo para el contenido */
+  margin: 0 auto;  /* Centrar horizontalmente */
+  padding: 20px;
 }
 
+main form {
+  display: flex;
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: flex-start; /* Alinea los elementos a la izquierda */
+  gap: 15px; /* Espacio entre elementos del formulario */
+}
 /* 5. INPUTS (CAMPOS DE TEXTO) */
 .input-welcome,
 .input-value1,
@@ -151,10 +160,27 @@ main h1 {
   /* Aplicamos la animación de "brillo" (box-shadow) */
   animation: blue-input-glow 2s ease-in-out infinite;
 }
+/* --- Estilo para Placeholders --- */
+.input-welcome::placeholder,
+.input-value1::placeholder,
+.input-value2::placeholder,
+.input-value3::placeholder {
+  color: #333; /* Un gris oscuro, pero visible */
+  opacity: 0.8; /* Ligeramente transparente */
+  transition: color 0.3s ease;
+}
+
+/* Cuando el input está seleccionado (focus), aclara el placeholder */
+.input-welcome:focus::placeholder,
+.input-value1:focus::placeholder,
+.input-value2:focus::placeholder,
+.input-value3:focus::placeholder {
+  color: #555;
+}
 
 /* 6. BOTONES */
 .button-ok {
-  /* (NO PERMITIDO) Botón oscuro por defecto */
+  
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -166,16 +192,27 @@ main h1 {
   color: #444; /* Texto gris oscuro */
   
   transition: all 0.2s ease;
-  animation: none; /* Sin pulso por defecto */
+  animation: button-pulse 2.5s infinite ease-in-out;
 }
 
 .button-ok:hover {
-  /* Se ilumina a Azul al interactuar */
   background-color: #00BFFF;
-  color: #000; /* Texto negro */
+  color: #000;
   transform: translateY(-2px);
   border-color: #00BFFF;
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.7);
+  /* Sombra de neón más intensa */
+  box-shadow: 0 0 10px #00BFFF,
+              0 0 20px #00BFFF,
+              0 0 30px rgba(0, 191, 255, 0.7);
+}
+
+.button-ok:active {
+  /* El botón se "hunde" ligeramente */
+  transform: translateY(1px); 
+  
+  /* Reducir el brillo momentáneamente */
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+  background-color: #008fbf; /* Un azul un poco más oscuro */
 }
 
 /* 7. TABLAS (como en animals.html) */
@@ -252,6 +289,43 @@ table, th, td {
   --bs-table-border-color: #333;
 }
 
+/* Quitar los fondos de Bootstrap y hacerla transparente */
+.table-dark, .table > :not(caption) > * > * {
+  background-color: transparent;
+  color: #999; /* Texto gris claro para el contenido */
+}
+
+/* Cabecera de la tabla */
+.table > thead {
+  color: #00BFFF; /* Color neón para la cabecera */
+  border-bottom: 2px solid #00BFFF; /* Borde neón */
+}
+
+/* Sobrescribir el hover de las filas */
+.table > tbody > tr:hover {
+    background-color: rgba(0, 191, 255, 0.15); /* Fondo azulado más fuerte */
+    color: #CCE5FF; /* Texto se aclara */
+    
+    /* Añadir un brillo a la fila */
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+    transform: scale(1.01); /* Ligero zoom */
+}
+
+/* Añadir transición suave a las filas */
+.table > tbody > tr {
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Quitar los bordes internos de la tabla para un look más limpio */
+.table > :not(caption) > * > *, th, td {
+    border: none;
+}
+
+/* Añadir un borde inferior sutil a cada fila */
+.table > tbody > tr {
+    border-bottom: 1px solid #222; /* Borde gris oscuro */
+}
+
 
 /* 8. LLUVIA DE FIGURAS (COLORES NUEVOS) */
 @keyframes fall {
@@ -271,7 +345,7 @@ table, th, td {
   width: 100%;
   height: 100%;
   
-  /* CORREGIDO: Poner detrás del contenido (z-index: 1) pero delante del body (z-index: 0) */
+  
   z-index: 0; 
   overflow: hidden; 
 }
@@ -289,27 +363,27 @@ table, th, td {
 }
 .figure-item.square {
   border-radius: 0;
-  /* CORREGIDO: Opacidad aumentada a 0.6 */
+ 
   background-color: rgba(0, 191, 255, 0.6); 
   width: 10px;
   height: 10px;
 }
 
-/* 9. BARRA DE SCROLL (SCROLLBAR) */
+
 ::-webkit-scrollbar {
   width: 10px;
   background-color: #0a0a0a;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #222; /* Gris oscuro */
+  background-color: #222; 
   border-radius: 10px;
   border: 2px solid #0a0a0a;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #444; /* Gris medio */
+  background-color: #444; 
 }
 
-/* 10. ANIMACIONES KEYFRAMES (SOLO LAS NECESARIAS) */
+/* 10. ANIMACIONES KEYFRAMES  */
 
 /* Animación de entrada */
 @keyframes content-fade-in {
@@ -336,37 +410,127 @@ table, th, td {
   }
 }
 
-@keyframes single-flicker {
-  
-  /* Paso 1: El título está "apagado" (color gris) 
-    durante el 90% de la animación (3.6 segundos). 
-  */
-  0%, 90% {
+@keyframes text-flicker {
+  /* La mayor parte del tiempo, el texto está "apagado" */
+  0%, 10%, 12%, 20%, 22%, 24%, 80%, 100% {
     color: #555;
     text-shadow: none;
   }
   
-  /* Paso 2: El parpadeo. 
-    Ocurre muy rápido, justo al final del ciclo.
-  */
-  91% {
+  /* Breves "encendidos" con brillo azul */
+  11%, 21%, 23%, 25%, 81% {
     color: #00BFFF;
     text-shadow: 0 0 10px #00BFFF;
   }
-  92% {
-    color: #555;
-    text-shadow: none;
+}
+
+@keyframes button-pulse {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 191, 255, 0);
   }
-  93% {
-    color: #00BFFF;
-    text-shadow: 0 0 10px #00BFFF;
+  50% {
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(0, 191, 255, 0);
+  }
+}
+
+@keyframes header-flicker {
+  /* --- 0% al 80%: Periodo de calma --- */
+  0%, 80% {
+    transform: translate(0, 0);
+    opacity: 1;
+    text-shadow: none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* === INICIO DE RÁFAGA DE GLITCH (dura 1 segundo) === */
+  
+  /* 80.1% (Inicia el temblor) */
+  80.1% {
+    transform: translate(-3px, 1px);
+    opacity: 0.8;
   }
   
-  /* Paso 3: Vuelve al estado "apagado" 
-    para terminar el ciclo.
-  */
-  94%, 100% {
-    color: #555;
+  /* 80.5% (Salto rojo + corte superior) */
+  80.5% {
+    transform: translate(3px, -2px);
+    text-shadow: -2px 0 red;
+    clip-path: polygon(0 10%, 100% 10%, 100% 100%, 0 100%);
+  }
+  
+  /* 81% (Salto azul + corte inferior) */
+  81% {
+    transform: translate(-5px, 1px);
+    text-shadow: 2px 0 #00BFFF;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 85%);
+  }
+  
+  /* 81.2% (Vibración y micro-corte) */
+  81.2% {
+    transform: translate(1px, -1px);
     text-shadow: none;
+    clip-path: polygon(0 45%, 100% 45%, 100% 55%, 0 55%);
+  }
+  
+  /* 81.5% (Salto grande) */
+  81.5% {
+    transform: translate(10px, 3px) scale(1.1);
+    opacity: 0.7;
+    text-shadow: 4px 0 #00BFFF, -4px 0 red;
+  }
+  
+  /* 81.7% (Vuelve al centro pero cortado) */
+  81.7% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
+  }
+  
+  /* 81.8% (Corte en otra sección) */
+  81.8% {
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  }
+  
+  /* 81.9% (Ambos cortes) */
+  81.9% {
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%, 0 60%, 100% 60%, 100% 100%, 0 100%);
+  }
+
+  /* 82% (Vuelta a la normalidad momentánea) */
+  82% {
+    transform: translate(0, 0);
+    opacity: 1;
+    text-shadow: none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  
+  /* 82.5% (Parpadeo rápido de opacidad) */
+  82.5% {
+    opacity: 0.3;
+  }
+  82.6% {
+    opacity: 1;
+  }
+  
+  /* 95% (Un último glitch antes del reinicio) */
+  95% {
+    transform: translate(3px, 1px);
+    text-shadow: -2px 0 red;
+  }
+  95.2% {
+    transform: translate(-2px, -1px);
+    text-shadow: 2px 0 #00BFFF;
+  }
+
+  /* === FIN DE RÁFAGA === */
+
+  /* 95.5%, 100% (Vuelta a la calma) */
+  95.5%, 100% {
+    transform: translate(0, 0);
+    opacity: 1;
+    text-shadow: none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
