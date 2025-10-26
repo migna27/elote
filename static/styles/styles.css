@@ -101,7 +101,10 @@ main label {
   text-shadow: none;
   transition: color 0.3s ease;
 }
-
+main p.label-active {
+  /* 500ms de duración */
+  animation: label-flicker 0.5s ease-in-out;
+}
 main p:hover,
 main label:hover {
   color: #ccc; 
@@ -194,19 +197,21 @@ main form {
   border: 2px solid #444; /* Borde gris oscuro */
   color: #444; /* Texto gris oscuro */
   
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  
   animation: button-pulse 2.5s infinite ease-in-out;
 }
 
 .button-ok:hover {
   background-color: #00BFFF;
   color: #000;
-  transform: translateY(-2px);
+  
   border-color: #00BFFF;
   /* Sombra de neón más intensa */
   box-shadow: 0 0 10px #00BFFF,
               0 0 20px #00BFFF,
               0 0 30px rgba(0, 191, 255, 0.7);
+  animation: button-glitch-hover 0.25s infinite linear;
 }
 
 .button-ok:active {
@@ -599,5 +604,55 @@ table, th, td {
     opacity: 0;
     transform: translate(30px, 10px) scale(0.9);
     clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
+  }
+}
+
+@keyframes label-flicker {
+  0% {
+    color: #999;
+    text-shadow: none;
+  }
+  20% {
+    color: #00BFFF;
+    text-shadow: 0 0 5px #00BFFF;
+    transform: translateX(2px);
+  }
+  40% {
+    color: #999;
+    text-shadow: none;
+    transform: translateX(-2px);
+  }
+  60% {
+    color: #00BFFF;
+    text-shadow: 0 0 5px #00BFFF;
+  }
+  100% {
+    color: #999;
+    text-shadow: none;
+    transform: translateX(0);
+  }
+}
+
+/* Animación 'glitch' para el hover de los botones */
+@keyframes button-glitch-hover {
+  0% {
+    transform: translate(0, -2px);
+    text-shadow: none;
+  }
+  25% {
+    transform: translate(-3px, -2px);
+    text-shadow: -2px 0 red;
+  }
+  50% {
+    transform: translate(3px, -2px);
+    text-shadow: 2px 0 #00BFFF;
+  }
+  75% {
+    transform: translate(-2px, -2px);
+    text-shadow: -1px 0 red;
+  }
+  100% {
+    transform: translate(0, -2px);
+    text-shadow: none;
   }
 }

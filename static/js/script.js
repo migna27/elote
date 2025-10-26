@@ -285,4 +285,36 @@ hackerElements.forEach(element => {
 
     applyHackerEffect(element, revealSpeed, scrambleSpeed);
 });
+// --- INICIO: INTERACCIÓN AVANZADA DE FORMULARIOS ---
+
+// 1. Seleccionar todos los inputs de formulario que tenemos
+const allInputs = document.querySelectorAll(
+    '.input-welcome, .input-value1, .input-value2, .input-value3'
+);
+// Duración de la animación en CSS (500ms)
+const labelAnimationDuration = 500;
+
+allInputs.forEach(input => {
+    // 2. Añadir listener para cuando el usuario HACE CLIC en el input
+    input.addEventListener('focus', () => {
+        // 3. Encontrar el <p> que está justo antes (su etiqueta)
+        const label = input.previousElementSibling;
+
+        // 4. Comprobar que existe y es un <p>
+        if (label && label.tagName === 'P') {
+            // 5. Aplicar la clase de animación
+            label.classList.add('label-active');
+
+            // 6. Quitar la clase después de que termine la animación
+            // para que pueda volver a ejecutarse la próxima vez
+            setTimeout(() => {
+                if (label) { 
+                    label.classList.remove('label-active');
+                }
+            }, labelAnimationDuration);
+        }
+    });
+});
+
+// --- FIN: INTERACCIÓN AVANZADA DE FORMULARIOS ---
 });
