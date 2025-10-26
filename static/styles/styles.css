@@ -656,3 +656,53 @@ table, th, td {
     text-shadow: none;
   }
 }
+
+/* --- INICIO: CSS COMETA ALEATORIO (V3) --- */
+
+
+/* 2. El cometa (la cabeza) */
+.comet {
+  /* Color por defecto, JS lo cambiará */
+  --comet-color: #00BFFF; 
+  
+  position: fixed;
+  top: 0; /* JS controlará esto */
+  left: -350px; /* Posición inicial */
+  opacity: 1; /* Hacemos que sea visible de inmediato */
+  z-index: 5;
+  
+  /* Estilo de la cabeza */
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  
+  /* Brillo de la cabeza (usa el color variable) */
+  box-shadow: 0 0 10px 5px #fff,
+              0 0 25px 15px var(--comet-color);
+  
+  
+}
+
+/* 3. La estela (usa el color variable) */
+.comet::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px; /* Detrás de la cabeza (corregido) */
+  transform: translateY(-50%);
+  
+  width: 300px; /* Largo de la estela */
+  height: 3px;
+  
+  /* Gradiente (usa el color variable) (corregido) */
+  background: linear-gradient(to left,
+    rgba(255, 255, 255, 0.8) 0%,
+    var(--comet-color) 30%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  
+  border-radius: 3px;
+  filter: blur(1px);
+}
+/* --- FIN: CSS COMETA ALEATORIO (V3) --- */

@@ -317,4 +317,100 @@ allInputs.forEach(input => {
 });
 
 // --- FIN: INTERACCIÓN AVANZADA DE FORMULARIOS ---
+// --- INICIO: CÓDIGO DE COMETA ALEATORIO (V4 - Full JS) ---
+        
+// Array para almacenar todos los cometas activos
+let activeComets = [];
+// Variable para asegurar que el bucle de animación solo corra una vez
+let isAnimatingComets = false;
+
+function createRandomComet() {
+    const container = document.querySelector(".figure-rain-container");
+    if (!container) return;
+
+    const cometElement = document.createElement('div');
+    cometElement.className = 'comet';
+
+    // 1. Aleatoriedad de trayectoria y velocidad
+    const startY_vh = Math.random() * 80; // % desde arriba (0 a 80%)
+    const startY_px = (startY_vh / 100) * window.innerHeight;
+    const speed = Math.random() * 5 + 5; // Píxeles por fotograma
+    
+    // ÁNGULO ALEATORIO: -20 a +20 grados.
+    // Esto permite que vaya hacia arriba-derecha o abajo-derecha.
+    const angleDeg = Math.random() * 40 - 20; 
+    const angleRad = angleDeg * (Math.PI / 180); // Convertir a radianes
+
+    // 2. Calcular velocidades X e Y basadas en el ángulo
+    const vx = Math.cos(angleRad) * speed; // Velocidad X
+    const vy = Math.sin(angleRad) * speed; // Velocidad Y (será - o +)
+
+    // 3. Aleatoriedad de apariencia
+    const scale = Math.random() * 0.5 + 0.7; // 70% a 120%
+    const colors = ['#00BFFF', '#8A2BE2', '#40E0D0', '#FFD700']; 
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    // 4. Crear el objeto cometa para el bucle de animación
+    const cometObject = {
+        element: cometElement,
+        x: -350, // Posición X inicial
+        y: startY_px, // Posición Y inicial
+        vx: vx, // Velocidad X constante
+        vy: vy  // Velocidad Y constante
+    };
+
+    // 5. Aplicar los estilos iniciales (color, rotación, escala)
+    cometElement.style.top = startY_px + 'px';
+    cometElement.style.left = '-350px';
+    cometElement.style.setProperty('--comet-color', color);
+    
+    // ¡ESTO ES CLAVE!
+    // Rotamos el *cuerpo* del cometa para que coincida con su ángulo de vuelo
+    cometElement.style.transform = `scale(${scale}) rotate(${angleDeg}deg)`;
+    
+    container.appendChild(cometElement);
+    activeComets.push(cometObject);
+
+    // 6. Iniciar el bucle de animación si no está corriendo
+    if (!isAnimatingComets) {
+        isAnimatingComets = true;
+        animateComets();
+    }
+}
+
+// El bucle de animación que mueve los cometas
+function animateComets() {
+    // Iterar al revés para poder eliminar cometas de forma segura
+    for (let i = activeComets.length - 1; i >= 0; i--) {
+        let comet = activeComets[i];
+
+        // Actualizar la posición basada en la velocidad
+        comet.x += comet.vx;
+        comet.y += comet.vy;
+
+        // Aplicar la nueva posición al DOM
+        // Usamos transform para un movimiento más suave
+        comet.element.style.left = comet.x + 'px';
+        comet.element.style.top = comet.y + 'px';
+
+        // Eliminar el cometa si sale de la pantalla
+        if (comet.x > window.innerWidth + 350) {
+            comet.element.remove();
+            activeComets.splice(i, 1);
+        }
+    }
+
+    // Continuar el bucle mientras haya cometas
+    if (activeComets.length > 0) {
+        requestAnimationFrame(animateComets);
+    } else {
+        isAnimatingComets = false; // Detener el bucle si no hay cometas
+    }
+}
+
+// Lanzar un cometa nuevo cada 2 segundos
+setInterval(createRandomComet, 2000);
+
+// --- FIN: CÓDIGO DE COMETA ALEATORIO (V4 - Full JS) ---
+
 });
