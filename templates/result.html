@@ -2,11 +2,11 @@
  <html> 
     {% include 'header.html' %}
         <main>  
-            <h1>El resultado para: "{{ phrase }}"</h1>
+            <h1  class="hacker-effect">El resultado para: "{{ phrase }}"</h1>
             {% if result %}
-                <p>Es un palíndromo</p>
+                <p class="hacker-effect">Es un palíndromo</p>
             {% else %}
-                <p>No es un palíndromo</p>
+                <p class="hacker-effect">No es un palíndromo</p>
             {% endif %}
         </main>
        {% include 'footer.html' %}

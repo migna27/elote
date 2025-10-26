@@ -1,12 +1,12 @@
 <!DOCTYPE html>
  <html> 
     {% include 'header.html' %}
-        <main>  
-            <h1>El numero ganador es: "{{ numero }}"</h1>
+        <main >  
+            <h1 class="hacker-effect">El numero ganador es: "{{ numero }}"</h1>
                 {% if ganador == true%}
-                <p>Felicidades haz ganado</p>
+                <p class="hacker-effect">Felicidades haz ganado</p>
             {% else %}
-                <p>Haz perdido, pipipipi sigue participando</p>
+                <p class="hacker-effect">Haz perdido, pipipipi sigue participando</p>
             {% endif %}
         </main>
        {% include 'footer.html' %}

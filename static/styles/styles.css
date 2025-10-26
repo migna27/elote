@@ -9,7 +9,7 @@ html, body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    
+    cursor: crosshair;
     background-image: radial-gradient(
         circle 400px at var(--mouse-x) var(--mouse-y),
         rgba(0, 0, 128, 0.3) 0%,
@@ -83,11 +83,14 @@ main {
     flex: 1;
     padding: 30px;
     text-align: left;
-    animation: content-fade-in 0.6s ease-out forwards;
+    animation: content-glitch-in 0.6s ease-out forwards;
     
     /* AÑADIDO: Poner delante de la lluvia */
     position: relative;
     z-index: 1;
+}
+body.page-exiting main {
+  animation: content-glitch-out 0.6s ease-in forwards;
 }
 
 main p,
@@ -328,16 +331,8 @@ table, th, td {
 
 
 /* 8. LLUVIA DE FIGURAS (COLORES NUEVOS) */
-@keyframes fall {
-  from {
-    transform: translateY(-20vh);
-    opacity: 1;
-  }
-  to {
-    transform: translateY(110vh);
-    opacity: 0;
-  }
-}
+
+
 .figure-rain-container {
   position: fixed;
   top: 0;
@@ -352,23 +347,62 @@ table, th, td {
 .figure-item {
   position: absolute;
   top: -20px; 
-  width: 15px;
-  height: 15px;
-  background-color: #00BFFF; /* Azul */
-  border-radius: 60%;
-  opacity: 0.8; /* Sutil */
-  animation-name: fall;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-.figure-item.square {
-  border-radius: 0;
- 
-  background-color: rgba(0, 191, 255, 0.6); 
-  width: 10px;
-  height: 10px;
+  opacity: 0.8;
+  
+  /* Estilo "Matrix" */
+  color: #00BFFF; /* Color neón base */
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  user-select: none; /* Evita que se pueda seleccionar el texto */
+  
+  /* Transición suave para el efecto "quemado" */
+  transition: color 0.1s ease-out, text-shadow 0.1s ease-out, transform 0.1s ease-out;
 }
 
+/* Nueva clase para el efecto "quemado" */
+.figure-item.burning {
+  color: #E0FFFF; /* Un azul muy brillante, casi blanco */
+  transform: scale(1.1); /* Ligeramente más grande */
+  
+  /* Efecto de 'brillo' intenso */
+  text-shadow: 0 0 5px rgba(255,255,255,0.8),
+               0 0 10px #00BFFF,
+               0 0 15px #00BFFF;
+}
+
+.figure-item.red-particle {
+  color: #FF4444; /* Rojo brillante */
+  text-shadow: 0 0 5px #FF0000,
+               0 0 10px #FF0000;
+  z-index: 10; /* Asegurarse de que se vea por encima */
+}
+
+/* Estilo de la explosión "Nova" */
+.figure-item.nova {
+  z-index: 100;
+  /* Animación de la explosión */
+  animation: nova-pulse 0.5s ease-out forwards;
+}
+
+/* Keyframes para la animación de la Nova */
+@keyframes nova-pulse {
+  0% {
+    color: #FFFFFF;
+    text-shadow: 0 0 10px #FFFFFF,
+                 0 0 20px #FFFFFF,
+                 0 0 30px #FF4444,
+                 0 0 40px #FF0000;
+    transform: scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    color: transparent;
+    text-shadow: none;
+    transform: scale(8); /* Expansión grande */
+    opacity: 0;
+  }
+}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -386,14 +420,24 @@ table, th, td {
 /* 10. ANIMACIONES KEYFRAMES  */
 
 /* Animación de entrada */
-@keyframes content-fade-in {
-  from {
+@keyframes content-glitch-in {
+  0% {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translate(-10px, 5px);
+    clip-path: polygon(0 0, 100% 0, 100% 30%, 0 30%);
   }
-  to {
+  30% {
+    transform: translate(5px, -3px);
+    clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(0, 0);
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(0, 0);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
 }
 
@@ -532,5 +576,28 @@ table, th, td {
     opacity: 1;
     text-shadow: none;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@keyframes content-glitch-out {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+  30% {
+    transform: translate(-5px, 2px);
+    text-shadow: 2px 0 red;
+  }
+  50% {
+    opacity: 0.3;
+    transform: translate(10px, -5px) scale(1.05);
+    clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+    text-shadow: -2px 0 #00BFFF;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(30px, 10px) scale(0.9);
+    clip-path: polygon(0 70%, 100% 70%, 100% 80%, 0 80%);
   }
 }
