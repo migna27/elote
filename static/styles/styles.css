@@ -672,10 +672,10 @@ table, th, td {
   z-index: 5;
   
   /* Estilo de la cabeza */
-  width: 10px;
-  height: 10px;
+  width: 30px;
+  height: 30px;
   background-color: #fff;
-  border-radius: 50%;
+  border-radius: 80%;
   
   /* Brillo de la cabeza (usa el color variable) */
   box-shadow: 0 0 10px 5px #fff,
@@ -692,8 +692,8 @@ table, th, td {
   right: 10px; /* Detrás de la cabeza (corregido) */
   transform: translateY(-50%);
   
-  width: 300px; /* Largo de la estela */
-  height: 3px;
+  width: 700px; /* Largo de la estela */
+  height: 10px;
   
   /* Gradiente (usa el color variable) (corregido) */
   background: linear-gradient(to left,
@@ -702,7 +702,7 @@ table, th, td {
     rgba(0, 0, 0, 0) 100%
   );
   
-  border-radius: 3px;
-  filter: blur(1px);
+  border-radius: 10px;
+  filter: blur(5px);
 }
 /* --- FIN: CSS COMETA ALEATORIO (V3) --- */
